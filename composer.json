@@ -1,0 +1,14 @@
+{
+    "name": "gabri/carrinhophp",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "gabriel"
+        }
+    ],
+    "require": {}
+}
