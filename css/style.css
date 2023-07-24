@@ -1,0 +1,80 @@
+* {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  margin: 0px;
+  display: grid;
+  grid-template-rows: 130px 60px 1fr 100px;
+  grid-template-columns: 1fr;    
+  grid-template-areas: "cabecalho" "navegacao" "principal" "rodape";
+}
+
+.cabecalho {
+  grid-area: "cabecalho";
+  background-color: #014ba0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+  z-index: 1;
+  box-shadow: 0px 4px 9px -2px rgba(0,0,0,0.75);
+}
+
+.logo {
+  max-width:300px;
+  max-height:350px;
+  width: auto;
+  height: auto;
+  margin-right: 75%;
+}
+
+.navegacao {
+  grid-area: "navegacao";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff7b00;
+  text-align: right;
+}
+
+.titulo-nav {
+  display: inline-block;
+  text-align: right;
+  color: #f0f0f0;
+}
+
+.titulo-nav > a{
+  display: inline-block;
+  text-align: right;
+  color: #f0f0f0;
+  text-decoration: none;
+}
+
+.principal {
+  grid-area:"principal";
+  height: calc(100vh - 240px);
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.rodape {
+  grid-area: "rodape";
+  background-color: #014ba0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+  font-size: 1.2rem;
+  padding-right: 0px;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  color: #ffffff;
+}
+
+

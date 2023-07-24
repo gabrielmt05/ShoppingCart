@@ -2,30 +2,34 @@
 
 namespace app\classes;
 use app\interface\Cartinterface;
+use app\model\Read;
 
-class CartProducts{
-
-    public function __construct(private Cartinterface $cartinterface)
-    {    
+class CartProducts extends Read{
+    protected $productsInCart;
+    protected $productsInDataBase;
+    public function __construct(Cartinterface $cartinterface){
+        $this->productsInCart = $cartinterface->cart();
+        $this->productsInDataBase = (new Read)->all("products");
     }
     public function products(){
-        $productsInCart = $this->cartinterface->cart();
-        $productsInDataBase = require realpath(dirname(__FILE__, 2) . '/helpers/products.php');
-        $products = [];
+        $productsData = [];
         $total = 0;
-        
-        foreach($productsInCart as $productId => $quantity){
-            $product = $productsInDataBase[$productId];
-            $productsData = [
-                'id' => $productId,
-                'product' => $product['name'],
-                'price' => $product['price'],
-                'qty' => $quantity,
-                'subtotal' => $quantity * $product['price']
-            ];
-            array_push($products, $productsData);
-            $total += $productsData['subtotal'] + $quantity;
+        foreach($this->productsInCart as $productId => $quantity){
+            $product = array_values(array_filter($this->productsInDataBase, fn ($product) => (int)$product->id === $productId));
+            if (!empty($product)) {
+                $productData = [
+                    'id' => $productId,
+                    'name' => $product[0]->name,
+                    'price' => $product[0]->price,
+                    'qty' => $quantity,
+                    'subtotal' => $quantity * $product[0]->price
+                ];
+
+                $productsData[] = $productData;
+                $total += $productData['subtotal'];
+            }
         }
-        return ['products' => $products, 'total' => $total];
+        return ['products' => $productsData, 'total' => $total];
     }
 }
+

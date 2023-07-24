@@ -3,12 +3,15 @@
 session_start();
 
 require realpath(dirname(__FILE__, 2) . "/vendor/autoload.php");
-use app\classes\CartProducts;
+
 use app\classes\Cart;
+use app\classes\CartProducts;
+use app\database\DataBase;
+use app\model\Read;
+use app\model\Model;
 
-$cart = new CartProducts(new Cart);
-$products = $cart->products();
-
+$cartProducts = new CartProducts(new Cart);
+$products = $cartProducts->products();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,12 +30,14 @@ $products = $cart->products();
         <ul>
     <?php foreach($products['products'] as $product):?>
         <li>
-        <?php echo $product['product']; ?>
+        <?php echo $product['name'] ?>
         <form action="quantity.php" method="get">
-            <input type="text" name="qty" value="<?php echo $product['qty'] ?>" id="cart-input-qty">
-            <input type="hidden" name="id" value="<?php echo $product['id'] ?>">
-        </form> x <?php echo number_format($product['price'], 2,',','.') ?>
+            <input type="hidden" name="id" value="<?php echo $product['id']?>">
+            quantidade
+            <input type="text" name="qty" value="<?php echo $product['qty']?>">
+        </form> x <?php echo number_format($product['price'], 2,'.',',') ?>
         <a href="remove.php?id=<?php echo $product['id'] ?>">remove</a>
+        <hr>
         </li>
         <?php endforeach ?>
         </ul>

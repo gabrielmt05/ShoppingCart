@@ -10,4 +10,4 @@ use app\classes\Cart;
 $cart = new Cart();
 $cart->clear();
 
-header('location:index.php');
+header('location:cart.php');

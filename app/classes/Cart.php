@@ -1,5 +1,4 @@
 <?php
-// session_start();
 
 namespace app\classes;
 use app\interface\Cartinterface;
@@ -21,21 +20,21 @@ class Cart implements Cartinterface
             } else {
                 unset($_SESSION['cart'][$product]);
             }
-            return true; // Indica que a quantidade do produto foi removida com sucesso
+            return true;
         }
-        return false; // Indica que o produto não foi encontrado ou o carrinho está vazio
+        return false; 
     }
     
     public function quantity($product, $quantity){
         if(isset($_SESSION['cart'][$product])){
             if($quantity === 0 || $quantity === ''){
                 $this->remove($product);
-                return true; // Indica que a quantidade do produto foi removida com sucesso
+                return true;
             }
             $_SESSION['cart'][$product] = $quantity;
-            return true; // Indica que a quantidade do produto foi atualizada com sucesso
+            return true;
         }
-        return false; // Indica que o produto não foi encontrado no carrinho
+        return false;
     }
     
     public function clear(){

@@ -12,5 +12,3 @@ $cart = new Cart();
 $cart->quantity($id, $quantity);
 
 header('location: cart.php');
-
-exit();
