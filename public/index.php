@@ -49,18 +49,4 @@ $products = $read->all('products');
 </footer>
 </body>
 </html>
-<?php 
 
-$users = new User;
-$users::user();
-try{
-    if(isset($users)){
-        foreach($users as $index){
-            foreach($index as $user){
-                echo $user . '<br>';
-            }
-        }
-    }
-}catch(Exception $e){
-    var_dump($e->getMessage());
-}
